@@ -21,7 +21,7 @@ def draw_line(window, x_start, y_start, x_end, y_end, width_line, color_line = (
                 color = color_line
                 )
 
-def draw_spiral(window, LIMIT):
+def draw_spiral(window, LIMIT, CHOICE):
     """Tous les deux virages, on doit augmenter de un le nombre de pas fait"""
 
     x_init, y_init = 450,450
@@ -43,9 +43,14 @@ def draw_spiral(window, LIMIT):
             x_end, y_end = x_init + STEP*cos(angle[nbre_virage%4]), y_init - STEP*sin(angle[nbre_virage%4]) # Minus because (0,0) is at the top right of the screen
 
             draw_line(window, x_init, y_init, x_end, y_end, WIDTH, COLOR)
-
-            if compteur > 1 and prime.is_prime_div(compteur):
-                draw_point(window, (x_end+x_init)/2, (y_end+y_init)/2, WIDTH + 2, COLOR)
+            
+            if CHOICE == 'd':
+                if compteur > 1 and prime.is_prime_div(compteur):
+                    draw_point(window, (x_end+x_init)/2, (y_end+y_init)/2, WIDTH + 2, COLOR)
+           
+            elif CHOICE == 'p':
+                if compteur > 1 and prime.is_prime_fermat(compteur):
+                    draw_point(window, (x_end+x_init)/2, (y_end+y_init)/2, WIDTH + 2, COLOR)
 
             x_init, y_init = x_end, y_end
             time.sleep(0.005)
@@ -68,7 +73,7 @@ if __name__ == '__main__':
     pg.display.set_caption("Prime spiral")
     window.fill((0,0,0))
 
-    draw_spiral(window, 200)
+    draw_spiral(window, 200,'p')
 
     time.sleep(20)
     pg.quit()

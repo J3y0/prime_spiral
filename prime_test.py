@@ -47,7 +47,7 @@ def is_prime_div(n):
     if n<2:
         return False
 
-    for d in range(2, floor(sqrt(n))):
+    for d in range(2, floor(sqrt(n))+1):
         if n%d == 0:
             return False
     return True
@@ -58,3 +58,7 @@ if __name__ == '__main__':
     print(is_prime_fermat(7))
     print(is_prime_fermat(70))
     print(is_prime_fermat(7152548))
+    print(is_prime_div(4))
+
+
+
